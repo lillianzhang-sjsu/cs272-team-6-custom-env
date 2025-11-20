@@ -134,8 +134,11 @@ class AccidentEnv(AbstractEnv):
 
         # Penalty for tailgating
         forward_vehicle, rear_vehicle = self.road.neighbour_vehicles(self.agent_vehicle, self.agent_vehicle.lane_index)
-        distance_from_forward_vehicle = np.linalg.norm(self.agent_vehicle.position - forward_vehicle.position)
-        tailgating_reward = min(0, (distance_from_forward_vehicle - 10) / 20)
+        if forward_vehicle is not None:
+            distance_from_forward_vehicle = np.linalg.norm(self.agent_vehicle.position - forward_vehicle.position)
+            tailgating_reward = min(0, (distance_from_forward_vehicle - 10) / 20)
+        else:
+            tailgating_reward = 0.0
 
         # Reward for job well done - if agent is in the right-most lane and successfully avoided the crash
         is_right = self.agent_vehicle.lane_index == 3
