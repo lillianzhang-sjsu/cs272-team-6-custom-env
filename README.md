@@ -13,16 +13,6 @@ Our custom environment **'accident-v0'** simulates a **Car Accident** scenario b
 2. Location of the crash is fixed, but the crash can occur in any 2 random lanes (adjacent to each other).   
 3. A modified reward function with new rewards & penalties, suitable for a highway crash scenario.
 
-## Crash Scenario Insertion
-During reset(), the environment:
-- Calls createroad() to build straight multilane road (4 lanes by default, 1000 meters long).
-- Places two crashed vehicles at specific positions in a randomly chosen lane (crashlaneindex), with CrashedVehicle objects at positions 500 and 505 meters. These are static and act as "hazards" that the agent must react to.
-- Populates the environment with other moving vehicles.
-
-## Ego Vehicle (Agent) & Traffic Generation
-- The agent-controlled vehicle is created at a start position and added to the road.
-- Additional vehicles (traffic) are added using standard traffic vehicle logic, with randomized behavior and positions.
-
 ## Objective
 The main objective of the ego-vehicle is to react to the crash on the highway and respond appropriately in the following ways to ensure safe and efficient driving.
 
@@ -33,7 +23,17 @@ The main objective of the ego-vehicle is to react to the crash on the highway an
 5. Not coming to a complete stop at any point.   
 6. Not tailgating any vehicles at any point.   
 7. Not driving off the road at any point.
-   
+
+## Crash Scenario
+During **reset()**, the environment:
+- Calls createroad() to build straight multilane road (4 lanes by default, 1000 meters long).
+- Places two crashed vehicles at specific positions in a randomly chosen lane (crashlaneindex), with CrashedVehicle objects at positions 500 and 505 meters. These are static and act as "hazards" that the agent must react to.
+- Populates the environment with other moving vehicles.
+
+## Ego Vehicle (Agent) & Traffic Generation
+- The agent-controlled vehicle is created at a start position and added to the road.
+- Additional vehicles (traffic) are added using standard traffic vehicle logic, with randomized behavior and positions.
+  
 ## Reward Function
 Our reward function retains some rewards from the original highway_env and introduces a couple of additional rewards and penalties, suitable for a crash scenario. The rewards are designed to foster driving at high speed, on the rightmost lanes, and to avoid collisions.
 
@@ -70,9 +70,17 @@ This file, which has the documentation for our **accident_v0** environment
 ## Usage
 ### Clone our GitHUb repo
 ```git clone https://github.com/lillianzhang-sjsu/cs272-team-6-custom-env.git```
-### Install depedencies 
-```pip install highway-env```
 
+### Optional - Create a virtual environment
+```conda create -n rl-env python=3.11```
+
+```conda activate rl-env```
+
+### Install depedencies 
+#### On MacOS terminal 
+```pip install gymnasium highway-env 'stable-baselines3[extra]' pygame matplotlib pandas scipy```
+
+### Run the code in manual control mode
 You can experience the environment in manual control mode by running
 
 ```python run_custom_env.py```
