@@ -1,4 +1,3 @@
-
 # CS272-Final Project - Team 6
 
 
@@ -16,7 +15,6 @@
 Our custom environment [accident-v0] simulates a Car Accident scenario built on top of [Highway-Env](https://highway-env.farama.org/environments/highway/) and [Gymnasium](https://gymnasium.farama.org/). Here are the novel customizations we have introduced into our environment - 
 
     1. We have introduced a 2-car crash on the highway, halfway down the road, spread across 2 lanes. Although the location of the crash is fixed, the crash may occur in any 2 lanes chosen randomly. 
-    
     2. We have also modified the reward functions to better suit a highway crash scenario.
 ## Objective
 The main objective of the ego-vehicle is to react to the crash on the highway and respond appropriately in the following ways to ensure safe and efficient driving.
@@ -28,15 +26,25 @@ The main objective of the ego-vehicle is to react to the crash on the highway an
     4. Not tailgating any vehicles at any point.
     4. Not driving off the road at any point.
 ## Reward Function
-Our reward function retains some rewards from the original highway_env and introduces some additional rewards and penalties, adapted for a crash scenario. The rewards are designed to encourage safe and efficient driving.
+Our reward function retains some rewards from the original highway_env and introduces a couple of additional rewards and penalties, adapted for a crash scenario. The rewards are designed to foster driving at high speed, on the rightmost lanes, and to avoid collisions.
 
-    collision_reward :
-    high_speed_reward :
-    right_lane_reward :
-    on_road_reward :
-    reaction_reward : 
-    tailgating_reward :
-    job_well_done_reward :
+
+| Reward Type | Description | 
+| :------- | :------: | 
+| collision_reward| penalty for colliding with another vehicle| 
+| high_speed_reward| reward for driving at posted high speed limit| 
+| right_lane_reward| reward for driving on right-most lane|
+| on_road_reward | reward for remaning on road |
+| reaction_reward | penalty for being in crash lane(s) or close to crash| 
+| tailgating_reward |penalty for tailgating |
+| job_well_done_reward |reward for safely avoiding crash & driving on right-most lane|
+     
+     
+    
+    
+    
+    
+     
 
 
 
@@ -61,4 +69,6 @@ You can experience the environment in manual control mode by running
 [1] E. Leurent, “An Environment for Autonomous Driving Decision-Making,” GitHub repository. [GitHub, 2018 Available Online](https://github.com/eleurent/highway-env)
 
 [2] M. Towers et al., “Gymnasium.” [Zenodo, Mar. 2023 Available Online](https://zenodo.org/records/8127026)
+
+
 
